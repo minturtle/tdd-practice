@@ -123,6 +123,21 @@ public class FrameTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("보너스 점수를 두번 더할 수 없다.")
+    void t11() throws Exception {
+        //given
+        putTwice(nextFrame, 5, 4);
+        frame.put(10);
+        frame.addBonusScore(nextFrame);
+
+        Frame newFrame = new Frame();
+        putTwice(newFrame, 3, 4);
+        //when
+        frame.addBonusScore(newFrame);
+        //then
+        assertThat(frame.getTotalScore()).isEqualTo(19);
+    }
     private void putTwice(Frame frame, int trial1, int trial2) throws Exception{
         frame.put(trial1);
         frame.put(trial2);

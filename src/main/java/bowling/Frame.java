@@ -28,9 +28,6 @@ public class Frame {
         trial++;
     }
 
-    private void checkIsScoreOver10(int score) throws IllegalArgumentException{
-        if(score + first > 10) throw new IllegalArgumentException(overExceedMsg);
-    }
 
     public void addBonusScore(Frame frame){
         if(bonusScore != 0) return;
@@ -57,6 +54,9 @@ public class Frame {
         return false;
     }
 
+    private void checkIsScoreOver10(int score) throws IllegalArgumentException{
+        if(score + first > 10) throw new IllegalArgumentException(overExceedMsg);
+    }
     private void checkIsSpareOrStrike() {
         if(first == 10) isStrike = true;
         else if(first + second == 10) isSpare = true;
