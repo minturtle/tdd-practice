@@ -1,3 +1,5 @@
+package movie;
+
 public class Movie {
 
     //평가별의 총 갯수

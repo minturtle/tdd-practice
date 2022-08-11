@@ -30,7 +30,7 @@ public class Frame {
 
 
     public void addBonusScore(Frame frame){
-        if(bonusScore != 0) return;
+        if(bonusScore != 0) return; //보너스 스코어가 두번 더해지는 것을 막음.
         if(isStrike()){
             bonusScore += frame.first;
             bonusScore += frame.second;

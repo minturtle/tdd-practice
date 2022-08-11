@@ -1,3 +1,6 @@
+package movie;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +21,7 @@ public class MovieTest{
         //given
         //when
         //then
-        assertThat(movie).isNotNull();
+        Assertions.assertThat(movie).isNotNull();
     }
 
     @Test
@@ -27,7 +30,7 @@ public class MovieTest{
         //given
         //when
         //then
-        assertThat(movie.getAverageRating()).isEqualTo(0.0);
+        Assertions.assertThat(movie.getAverageRating()).isEqualTo(0.0);
     }
 
     @Test
@@ -37,7 +40,7 @@ public class MovieTest{
         //when
         movie.rate(1);
         //then
-        assertThat(movie.getAverageRating()).isEqualTo(1);
+        Assertions.assertThat(movie.getAverageRating()).isEqualTo(1);
     }
 
     @Test
@@ -48,7 +51,7 @@ public class MovieTest{
         movie.rate(3.0);
         movie.rate(5.0);
         //then
-        assertThat(movie.getAverageRating()).isEqualTo(4.0);
+        Assertions.assertThat(movie.getAverageRating()).isEqualTo(4.0);
     }
 
     @Test
