@@ -12,9 +12,10 @@ public class Frame {
     private boolean isStrike;
 
     private final String trialErrMsg = "게임은 두번 플레이 되어야 합니다.";
-
+    private final String overExceedMsg = "총 점수는 10점을 넘을 수 없습니다.";
 
     public void put(int score) throws RuntimeException{
+        checkIsScoreOver10(score);
         if(isFirstTrial()) {
             first = score;
             checkIsSpareOrStrike();
@@ -27,7 +28,12 @@ public class Frame {
         trial++;
     }
 
+    private void checkIsScoreOver10(int score) throws IllegalArgumentException{
+        if(score + first > 10) throw new IllegalArgumentException(overExceedMsg);
+    }
+
     public void addBonusScore(Frame frame){
+        if(bonusScore != 0) return;
         if(isStrike()){
             bonusScore += frame.first;
             bonusScore += frame.second;
@@ -37,10 +43,10 @@ public class Frame {
         }
     }
 
-    //점수를 두번 다 입력해야지만 totalScore을 계산할 수 있다.
+    //점수를 두번 다 입력하지 않으면 0점이 나온다.(스트라이크 제외)
     //spare이거나 strike인 경우에 bonusScore을 추가해줘야 한다.
-    public int getTotalScore() throws RuntimeException{
-        if(!isStrike() && trial != 2) throw new RuntimeException(trialErrMsg);
+    public int getTotalScore(){
+        if(!isStrike() && trial != 2) return 0;
         return first + second + bonusScore;
     }
 

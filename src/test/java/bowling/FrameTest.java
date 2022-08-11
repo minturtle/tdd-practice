@@ -107,7 +107,23 @@ public class FrameTest {
         //then
         assertThat(frame.isDone()).isTrue();
     }
-    private void putTwice(Frame frame, int trial1, int trial2) {
+
+    @Test
+    @DisplayName("점수의 총 합이 10점을 넘어서는 안됨")
+    void t10() throws Exception {
+        //given
+        //when
+        //then
+        assertThatThrownBy(()->{
+            frame.put(12);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(()->{
+            putTwice(frame, 5, 6);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private void putTwice(Frame frame, int trial1, int trial2) throws Exception{
         frame.put(trial1);
         frame.put(trial2);
     }

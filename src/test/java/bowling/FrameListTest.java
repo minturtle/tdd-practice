@@ -75,7 +75,9 @@ class FrameListTest {
         //when
         putMany(18, 0);
         putMany(2, 5); //spare
-        putMany(2, 1); //추가 기회
+        if(frameList.isAbleToGetBonusChance()){
+            putMany(2, 1); //추가 기회
+        }
         //then
         assertThat(frameList.getTotalScore()).isEqualTo(13);
     }
@@ -87,29 +89,37 @@ class FrameListTest {
         //when
         putMany(18, 0);
         frameList.put(10); // strike
-        putMany(2, 1); //추가 기회
+        if(frameList.isAbleToGetBonusChance()){
+            putMany(2, 1); //추가 기회
+        }
         //then
         assertThat(frameList.getTotalScore()).isEqualTo(14);
     }
 
     @Test
-    @DisplayName("10번 모두 스페어")
+    @DisplayName("10번 모두 스페어, 추가 기회 1점")
     void t8() throws Exception {
         //given
         //when
-        putMany(22, 5);
+        putMany(20, 5);
+        if(frameList.isAbleToGetBonusChance()){
+            putMany(2, 1); //추가 기회
+        }
         //then
-        assertThat(frameList.getTotalScore()).isEqualTo(160);
+        assertThat(frameList.getTotalScore()).isEqualTo(148);
     }
 
     @Test
-    @DisplayName("10번 모두 스트라이크")
+    @DisplayName("10번 모두 스트라이크, 추가 기회 1점")
     void t9() throws Exception {
         //given
         //when
-        putMany(11, 10);
+        putMany(10, 10);
+        if(frameList.isAbleToGetBonusChance()){
+            putMany(2, 1); //추가 기회
+        }
         //then
-        assertThat(frameList.getTotalScore()).isEqualTo(210);
+        assertThat(frameList.getTotalScore()).isEqualTo(194);
     }
     private void putMany(int count, int score) {
         for(int i = 0; i < count; i++){

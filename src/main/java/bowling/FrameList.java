@@ -22,11 +22,26 @@ public class FrameList {
             score += frames[i].getTotalScore();
         }
 
-        if(frames[9].isStrike() || frames[9].isSpare()){
+        if(isAbleToGetBonusChance()){
             score += frames[10].getTotalScore();
         }
         return score;
     }
+
+    public boolean isAbleToGetBonusChance() {
+        return frames[9].isStrike() || frames[9].isSpare();
+    }
+
+    public int[] getTotalScoreList(){
+        int[] totalScoreList = new int[frames.length];
+
+        for(int i = 0; i < frames.length; i++){
+            int score = frames[i].isDone() ? frames[i].getTotalScore() : 0;
+            totalScoreList[i] = score;
+        }
+        return totalScoreList;
+    }
+
 
     private void addBonusScoreIfSpareOrStrike(Frame frame, Frame nextFrame) {
         if(frame.isSpare() || frame.isStrike()){

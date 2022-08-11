@@ -12,5 +12,20 @@ public class Game {
         return frameList.getTotalScore();
     }
 
+
+    public void print(){
+        int[] totalScoreList = frameList.getTotalScoreList();
+
+        printHorizenLine();
+        for (int score : totalScoreList) {
+            System.out.print("|" + score + "|");
+        }
+        System.out.println();
+        printHorizenLine();
+    }
+    private void printHorizenLine() {
+        System.out.println("---------------------------------------");
+    }
+
 }
 

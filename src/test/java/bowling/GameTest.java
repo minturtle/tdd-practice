@@ -85,7 +85,7 @@ public class GameTest {
         rollMany(10, 10);
         rollStrike();
         //then
-        assertThat(game.getScore()).isEqualTo(300);
+        assertThat(game.getScore()).isEqualTo(210);
 
     }
 
