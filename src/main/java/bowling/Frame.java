@@ -8,21 +8,17 @@ public class Frame {
 
     private int trial;
 
-    private boolean isSpare;
-    private boolean isStrike;
 
     private final String trialErrMsg = "게임은 두번 플레이 되어야 합니다.";
-    private final String overExceedMsg = "총 점수는 10점을 넘을 수 없습니다.";
+    private final String overScoreMsg = "총 점수는 10점을 넘을 수 없습니다.";
 
     public void put(int score) throws RuntimeException{
         checkIsScoreOver10(score);
         if(isFirstTrial()) {
             first = score;
-            checkIsSpareOrStrike();
         }
         else if(isSecondTrial()) {
             second = score;
-            checkIsSpareOrStrike();
         }
         else throw new RuntimeException(trialErrMsg);
         trial++;
@@ -47,21 +43,16 @@ public class Frame {
         return first + second + bonusScore;
     }
 
-    public boolean isSpare(){return isSpare;}
-    public boolean isStrike(){return isStrike;}
+    public boolean isSpare(){return trial == 2 && (first + second == 10);}
+    public boolean isStrike(){return trial == 1 && (first == 10);}
     public boolean isDone(){
         if(trial == 2 || isStrike()) return true;
         return false;
     }
 
     private void checkIsScoreOver10(int score) throws IllegalArgumentException{
-        if(score + first > 10) throw new IllegalArgumentException(overExceedMsg);
+        if(score + first > 10) throw new IllegalArgumentException(overScoreMsg);
     }
-    private void checkIsSpareOrStrike() {
-        if(first == 10) isStrike = true;
-        else if(first + second == 10) isSpare = true;
-    }
-
     private boolean isSecondTrial() {
         return trial == 1;
     }
